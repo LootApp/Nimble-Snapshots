@@ -20,6 +20,7 @@
 		C63B5DDA26F71A257C30F713 /* Pods_BootstrapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D94D9F88FB2A2621AAAD2E60 /* Pods_BootstrapTests.framework */; };
 		D44D1EFF1D9D87A9006DCD0C /* DynamicTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D1EFE1D9D87A9006DCD0C /* DynamicTypeTests.swift */; };
 		D44D1F011D9D87CC006DCD0C /* DynamicTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D1F001D9D87CC006DCD0C /* DynamicTypeView.swift */; };
+		D4E1BD851E7164DD00F0A4B5 /* WithoutQuickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E1BD841E7164DD00F0A4B5 /* WithoutQuickTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		A57DFE7C77534A99563B1C8B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D44D1EFE1D9D87A9006DCD0C /* DynamicTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeTests.swift; sourceTree = "<group>"; };
 		D44D1F001D9D87CC006DCD0C /* DynamicTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTypeView.swift; sourceTree = "<group>"; };
+		D4E1BD841E7164DD00F0A4B5 /* WithoutQuickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithoutQuickTests.swift; sourceTree = "<group>"; };
 		D94D9F88FB2A2621AAAD2E60 /* Pods_BootstrapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BootstrapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 				D44D1EFE1D9D87A9006DCD0C /* DynamicTypeTests.swift */,
 				5EDEF1DB1A1E5780004D7BAB /* Supporting Files */,
 				1DD47A571DD2AA04004B53FA /* DynamicSizeTests.swift */,
+				D4E1BD841E7164DD00F0A4B5 /* WithoutQuickTests.swift */,
 			);
 			path = BootstrapTests;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			buildConfigurationList = 5E28C2C81993C6FF0066DB4D /* Build configuration list for PBXNativeTarget "Bootstrap" */;
 			buildPhases = (
 				5E28C2A81993C6FE0066DB4D /* Sources */,
+				D4A0565B1E72BAEB00AB3788 /* SwiftLint */,
 				5E28C2A91993C6FE0066DB4D /* Frameworks */,
 				5E28C2AA1993C6FE0066DB4D /* Resources */,
 			);
@@ -223,11 +227,11 @@
 				TargetAttributes = {
 					5E28C2AB1993C6FE0066DB4D = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					5EDEF1D81A1E5780004D7BAB = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5E28C2AB1993C6FE0066DB4D;
 					};
 				};
@@ -301,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		94588961FAB1A07F383755A5 /* [CP] Copy Pods Resources */ = {
@@ -318,6 +322,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BootstrapTests/Pods-BootstrapTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D4A0565B1E72BAEB00AB3788 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  cd ..; swiftlint lint --no-cache\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -338,6 +356,7 @@
 			files = (
 				1DD47A581DD2AA04004B53FA /* DynamicSizeTests.swift in Sources */,
 				D44D1EFF1D9D87A9006DCD0C /* DynamicTypeTests.swift in Sources */,
+				D4E1BD851E7164DD00F0A4B5 /* WithoutQuickTests.swift in Sources */,
 				11BFADFD1BE4196100F74D8E /* BootstrapCustomFolderTests.swift in Sources */,
 				5EDEF1DE1A1E5780004D7BAB /* BootstrapTests.swift in Sources */,
 			);
@@ -464,7 +483,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.artsy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -481,7 +500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.artsy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -502,7 +521,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.artsy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bootstrap.app/Bootstrap";
 			};
 			name = Debug;
@@ -519,7 +538,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.artsy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bootstrap.app/Bootstrap";
 			};
 			name = Release;

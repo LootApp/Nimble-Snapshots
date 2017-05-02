@@ -1,5 +1,12 @@
 # Nimble-Snapshots
 
+## master
+
+* Drops support for Swift 2.3 - @marcelofabri
+* Adds device agnostic support for testing dynamic sizes - @fsaragoca
+* Makes it possible to use it without Quick - @marcelofabri
+* Support usesDrawRect when using PrettySyntax - @marcelofabri
+
 ## 4.4.2
 
 * Adds support for Carthage (Swift 3.0) - @juolgon & @lascorbe

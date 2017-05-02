@@ -1,17 +1,17 @@
-import Quick
 import Nimble
 import Nimble_Snapshots
+import Quick
 
 class BootstrapTests: QuickSpec {
     override func spec() {
-        describe("in some context", { () -> () in
+        describe("in some context") {
             var view: UIView!
 
             beforeEach {
                 setNimbleTolerance(0)
                 setNimbleTestFolder("tests")
-                view = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: 44, height: 44)))
-                view.backgroundColor = UIColor.blueColor()
+                view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 44, height: 44)))
+                view.backgroundColor = .blue
             }
 
             it("has a valid snapshot") {
@@ -43,11 +43,19 @@ class BootstrapTests: QuickSpec {
             // If this is not using drawRect it will fail
 
             it("has a valid snapshot when draw rect is turned on ") {
-                UIButton.appearance().tintColor = UIColor.redColor()
-                let imageView = UIButton(type: .ContactAdd)
+                UIButton.appearance().tintColor = .red
+                let imageView = UIButton(type: .contactAdd)
 
                 // expect(imageView).to( recordSnapshot(usesDrawRect: true) )
                 expect(imageView).to( haveValidSnapshot(usesDrawRect: true) )
+            }
+
+            it("has a valid snapshot when draw rect is turned on and is using pretty syntax") {
+                UIButton.appearance().tintColor = .red
+                let imageView = UIButton(type: .contactAdd)
+
+                // expect(imageView) == recordSnapshot(usesDrawRect: true)
+                expect(imageView) == snapshot(usesDrawRect: true)
             }
 
             it("handles recording with recordSnapshot") {
@@ -61,6 +69,6 @@ class BootstrapTests: QuickSpec {
                 setNimbleTolerance(1)
                 expect(view) == snapshot()
             }
-        })
+        }
     }
 }
