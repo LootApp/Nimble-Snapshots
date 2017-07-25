@@ -1,8 +1,6 @@
-import FBSnapshotTestCase
 import Foundation
 import Nimble
 import QuartzCore
-import Quick
 import UIKit
 
 public enum ResizeMode {
@@ -140,8 +138,8 @@ public func snapshot(_ name: String? = nil, sizes: [String: CGSize],
 public func haveValidDynamicSizeSnapshot(named name: String? = nil, sizes: [String: CGSize],
                                          isDeviceAgnostic: Bool = false, usesDrawRect: Bool = false,
                                          tolerance: CGFloat? = nil,
-                                         resizeMode: ResizeMode = .frame) -> MatcherFunc<Snapshotable> {
-    return MatcherFunc { actualExpression, failureMessage in
+                                         resizeMode: ResizeMode = .frame) -> Predicate<Snapshotable> {
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         return performDynamicSizeSnapshotTest(name, sizes: sizes, isDeviceAgnostic: isDeviceAgnostic,
                                               usesDrawRect: usesDrawRect, actualExpression: actualExpression,
                                               failureMessage: failureMessage, tolerance: tolerance,
@@ -202,8 +200,8 @@ public func recordSnapshot(_ name: String? = nil, sizes: [String: CGSize],
 
 public func recordDynamicSizeSnapshot(named name: String? = nil, sizes: [String: CGSize],
                                       isDeviceAgnostic: Bool = false, usesDrawRect: Bool = false,
-                                      resizeMode: ResizeMode = .frame) -> MatcherFunc<Snapshotable> {
-    return MatcherFunc { actualExpression, failureMessage in
+                                      resizeMode: ResizeMode = .frame) -> Predicate<Snapshotable> {
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         return performDynamicSizeSnapshotTest(name, sizes: sizes, isDeviceAgnostic: isDeviceAgnostic,
                                               usesDrawRect: usesDrawRect, actualExpression: actualExpression,
                                               failureMessage: failureMessage, isRecord: true, resizeMode: resizeMode)

@@ -2,7 +2,6 @@ import FBSnapshotTestCase
 import Foundation
 import Nimble
 import QuartzCore
-import Quick
 import UIKit
 
 @objc public protocol Snapshotable {
@@ -23,21 +22,14 @@ extension UIView : Snapshotable {
     }
 }
 
-@objc class FBSnapshotTest: NSObject {
-
-    var currentExampleMetadata: ExampleMetadata?
+@objc public class FBSnapshotTest: NSObject {
 
     var referenceImagesDirectory: String?
     var tolerance: CGFloat = 0
 
-    class var sharedInstance: FBSnapshotTest {
-        struct Instance {
-            static let instance: FBSnapshotTest = FBSnapshotTest()
-        }
-        return Instance.instance
-    }
+    static let sharedInstance = FBSnapshotTest()
 
-    class func setReferenceImagesDirectory(_ directory: String?) {
+    public class func setReferenceImagesDirectory(_ directory: String?) {
         sharedInstance.referenceImagesDirectory = directory
     }
 
@@ -195,24 +187,15 @@ private func recordSnapshot(_ name: String?, isDeviceAgnostic: Bool = false, use
 }
 
 private func currentTestName() -> String? {
-    if let quickExample = FBSnapshotTest.sharedInstance.currentExampleMetadata {
-        return quickExample.example.name
-    }
-
-    if let testCase = CurrentTestCaseTracker.shared.currentTestCase {
-        let characterSet = CharacterSet(charactersIn: "[]+-")
-        return testCase.name?.components(separatedBy: characterSet).joined()
-    }
-
-    return nil
+    return CurrentTestCaseTracker.shared.currentTestCase?.sanitizedName
 }
 
 internal var switchChecksWithRecords = false
 
 public func haveValidSnapshot(named name: String? = nil, usesDrawRect: Bool = false,
-                              tolerance: CGFloat? = nil) -> MatcherFunc<Snapshotable> {
+                              tolerance: CGFloat? = nil) -> Predicate<Snapshotable> {
 
-    return MatcherFunc { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         if switchChecksWithRecords {
             return recordSnapshot(name, usesDrawRect: usesDrawRect, actualExpression: actualExpression,
                                   failureMessage: failureMessage)
@@ -224,9 +207,9 @@ public func haveValidSnapshot(named name: String? = nil, usesDrawRect: Bool = fa
 }
 
 public func haveValidDeviceAgnosticSnapshot(named name: String? = nil, usesDrawRect: Bool = false,
-                                            tolerance: CGFloat? = nil) -> MatcherFunc<Snapshotable> {
+                                            tolerance: CGFloat? = nil) -> Predicate<Snapshotable> {
 
-    return MatcherFunc { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         if switchChecksWithRecords {
             return recordSnapshot(name, isDeviceAgnostic: true, usesDrawRect: usesDrawRect,
                                   actualExpression: actualExpression, failureMessage: failureMessage)
@@ -238,18 +221,18 @@ public func haveValidDeviceAgnosticSnapshot(named name: String? = nil, usesDrawR
     }
 }
 
-public func recordSnapshot(named name: String? = nil, usesDrawRect: Bool = false) -> MatcherFunc<Snapshotable> {
+public func recordSnapshot(named name: String? = nil, usesDrawRect: Bool = false) -> Predicate<Snapshotable> {
 
-    return MatcherFunc { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         return recordSnapshot(name, usesDrawRect: usesDrawRect,
                               actualExpression: actualExpression, failureMessage: failureMessage)
     }
 }
 
 public func recordDeviceAgnosticSnapshot(named name: String? = nil,
-                                         usesDrawRect: Bool = false) -> MatcherFunc<Snapshotable> {
+                                         usesDrawRect: Bool = false) -> Predicate<Snapshotable> {
 
-    return MatcherFunc { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         return recordSnapshot(name, isDeviceAgnostic: true, usesDrawRect: usesDrawRect,
                               actualExpression: actualExpression, failureMessage: failureMessage)
     }

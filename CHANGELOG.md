@@ -1,11 +1,48 @@
 # Nimble-Snapshots
 
-## master
+## Next
 
+* Nothing yet.
+
+## 6.2.1
+
+* Fixes Carthage install dependency mismatch – @NachoSoto 
+
+## 6.2.0
+
+* Makes DynamicType tests to work with `adjustsFontForContentSizeCategory` property
+  and with views that uses `traitCollectionDidChange:`. - @marcelofabri
+* Trigger a view to be loaded prior to first `traitCollectionDidChange`
+  call when doing dynamic type testing of a view controller - @yas375
+
+## 6.1.0
+
+* tvOS support for CocoaPods added. - @fousa
+
+## 6.0.0
+
+* Don't import Quick directly.
+  This means you should add Quick to your Podfile if you want to use it. - @marcelofabri
+
+## 5.1.0
+
+* Removes OCMock dependency for DynamicType subspec - @marcelofabri
+* Include all subspecs by default, allowing usage with Carthage - @marcelofabri
+
+## 5.0.1
+
+* Fixes Carthage installs of 5.0.0.
+
+## 5.0.0
+
+* Update the Cartfile to use always the latest stable release of Nimble and Quick.
+* Fix issue with the installation using Carthage.
+* Changed use of deprecated `MatcherFunc` to `Predicate` in favor of `Nimble v7.0.0`.
 * Drops support for Swift 2.3 - @marcelofabri
 * Adds device agnostic support for testing dynamic sizes - @fsaragoca
 * Makes it possible to use it without Quick - @marcelofabri
 * Support usesDrawRect when using PrettySyntax - @marcelofabri
+* Exposes `FBSnapshotTest` as a public class with a public `setReferenceImagesDirectory` function - @ashfurrow
 
 ## 4.4.2
 

@@ -2,10 +2,7 @@ require 'tmpdir'
 
 desc 'Run unit tests on iOS 9.3 and 10.3'
 task :test do
-  # workaround for https://github.com/travis-ci/travis-ci/issues/7638
-  sh "xcrun simctl create 'iPhone 6' com.apple.CoreSimulator.SimDeviceType.iPhone-6 com.apple.CoreSimulator.SimRuntime.iOS-9-3"
-
-  sh "set -o pipefail && xcodebuild -workspace 'Bootstrap/Bootstrap.xcworkspace' -sdk 'iphonesimulator' -scheme 'Bootstrap' -destination 'name=iPhone 6,OS=9.3' -destination 'name=iPhone 6,OS=10.3' clean build test | xcpretty --color --simple"
+  sh "set -o pipefail && xcodebuild -workspace 'Bootstrap/Bootstrap.xcworkspace' -sdk 'iphonesimulator' -scheme 'Bootstrap' -destination 'name=iPhone 6,OS=10.3.1' clean build test | xcpretty --color --simple"
 end
 
 desc 'Lint the library for CocoaPods usage'
@@ -15,9 +12,10 @@ end
 
 desc 'Run a local copy of Carthage on a temporary directory'
 task :carthage do
+  sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit'
+
   # make a folder, put a cartfile in and make it a consumer
   # of the root dir
-
   repo_dir = Dir.pwd
   Dir.mktmpdir('carthage_test') do |dir|
     Dir.chdir dir do
