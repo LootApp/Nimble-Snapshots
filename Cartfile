@@ -1,2 +1,2 @@
 github "LootApp/Nimble" ~> 7.0
-github "Loot/ios-snapshot-test-case" "2.1.4"
+github "LootApp/ios-snapshot-test-case" "2.1.4"
